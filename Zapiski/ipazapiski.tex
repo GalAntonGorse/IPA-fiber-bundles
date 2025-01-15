@@ -843,32 +843,40 @@ When $U = M$, we talk about a global section.
 Let $E, F$ be vector bundles over a manifold $M$ of rank $k_1, k_2,$ respectively.
 WLOG assume that both have the same trivialization atlas $\{U_\alpha\}$ (take a refinement, if needed).
 Furthermore, they have trivialization maps $\varphi_\alpha ^E, \varphi_\alpha ^F$ and transition maps 
-$g_{\alpha \beta} ^E, g_{\alpha \beta} ^F$, respectively.
+$g_{\alpha \beta} ^E, g_{\alpha \beta} ^F$, respectively. 
 
 \subsubsection*{Direct sum $E \oplus F$}
 
-For $U_\alpha \cap U_\beta \neq \emptyset$, define the transition maps 
+Explicitly, we can construct the vector bundle $E \oplus F$ as a set 
+$$\bigsqcup_{p \in M} (E_p \oplus F_p) = \{(p, (u, v))\ |\ p  \in M,\ u \in E_p, v \in F_p\},$$
+equipped with the smooth structure induced by trivializations 
+$$\varphi_\alpha ^{E \oplus F} : \bigsqcup_{p \in U_\alpha} (E_p \oplus F_p) \to U_\alpha \times \R^{k_1 + k_2},\quad (p, (u, v)) \mapsto (p, (\varphi_p ^E (u), \varphi_p ^F (v))).$$
+For $U_\alpha \cap U_\beta \neq \emptyset$, the transition maps are
 $$g_{\alpha \beta} ^{E \oplus F} (x) = \begin{pmatrix}
   g_{\alpha \beta} ^E (x) & \\
   & g_{\alpha \beta} ^F (x)
 \end{pmatrix}: U_\alpha \cap U_\beta \to GL(k_1 + k_2).$$
-Then using the theorem for construction of vector bundles,
-we define $E \oplus F$ as the vector bundle over $M$ with fibers $\R^{k_1 + k_2}$ and transition maps $g_{\alpha \beta} ^{E \oplus F}$.
+Alternatively, we can construct $E \oplus F$ using the theorem for construction of vector bundles,
+by defining it as the vector bundle over $M$ with fibers $\R^{k_1 + k_2}$ and transition maps $g_{\alpha \beta} ^{E \oplus F}$.
 
 \subsubsection*{Tensor product $E \oplus F$}
 
+Explicitly, we define the vector bundle $E \otimes F$ as the set
+$$\bigsqcup_{p \in M} (E_p \otimes F_p),$$
+equipped by the smooth structure induced by trivializations 
+$$\varphi_\alpha ^{E \otimes F} : \bigsqcup_{p \in U_\alpha} (E_p \otimes F_p) \to U_\alpha \times \R^{k_1 \cdot k_2},\quad (p, (\underbrace{u}_{\in E_p} \otimes \underbrace{v}_{\in F_p})) \mapsto (p, \varphi_p ^F (v) \cdot (\varphi_\alpha ^E (u))^\top )$$
+(when extended linearly).
 For $A \in \R^{k_1 \times k_1}$ and $B \in \R^{k_2 \times k_2}$, we define the Cauchy product of matrices as 
 $$A \otimes B = \begin{pmatrix}
   a_{11} B & \cdots & a_{1 k_1} B\\
   \vdots & & \vdots\\
   a_{k_1 1} B & \cdots & a_{k_1 k_1} B
 \end{pmatrix}.$$
-Now again for $U_\alpha \cap U_\beta \neq \emptyset$, define the transition maps 
+Now again for $U_\alpha \cap U_\beta \neq \emptyset$, the transition maps for $E \otimes F$ are
 $$g_{\alpha \beta} ^{E \otimes F} (x) = \begin{pmatrix}
   g_{\alpha \beta} ^E (x) \otimes g_{\alpha \beta} ^F (x)
-\end{pmatrix}: U_\alpha \cap U_\beta \to GL(k_1 \cdot k_2)$$
-and $E \oplus F$ as the vector bundle over $M$ with fibers $\R^{k_1 \cdot k_2}$ and transition maps $g_{\alpha \beta} ^{E \otimes F}$.
-
+\end{pmatrix}: U_\alpha \cap U_\beta \to GL(k_1 \cdot k_2).$$
+Using the construction theorem, we can also define $E \otimes F$ as the vector bundle over $M$ with fibers $\R^{k_1 \cdot k_2}$ and transition maps $g_{\alpha \beta} ^{E \otimes F}$.
 
 \subsubsection*{External product $\Lambda^r (E)$}
 
@@ -877,15 +885,26 @@ as $$A(v_1 \otimes \dots \otimes v_r) := \frac{1}{r!} \sum_{\sigma \in S(r)} (-1
 Since $A^2 = A$, we have $V ^{\otimes r} = \ker A \oplus \im A$. Define $\Lambda^r (V) = A(V^{\otimes r}) = \im A$ and write 
 $$v_1 \wedge \dots \wedge v_r := A(v_1 \otimes \dots \otimes v_r).$$
 If $\{v_1, \dots, v_k\}$ is the basis of $V$, then $\{v_{i_1} \wedge \dots \wedge v_{i_r}\}$ is the basis for $\lambda^r (V)$ (if $r > k$, then $\lambda^r (V)$ is a trivial vector space).
-As before, we define $\Lambda^r (E)$ as a vector bundle over $M$, whose transition functions are 
-the matrices of $r$-minors of $g_{\alpha \beta} ^E$. If $r = \rank E$, then $\Lambda^r (E) = \det (E)$ is the determinant bundle of $E$.
+In particular, we have the canonical isomorphism $\Lambda^{r} (\R^{k}) \cong \R^{\binom{k}{r}}$.
+Now we define $\Lambda^r (E)$ as the set 
+$$\bigsqcup_{p \in M} \Lambda^r (E_p),$$
+equipped with the smooth structure induced by trivializations 
+$$\varphi_\alpha ^{\Lambda^r (E)} : \bigsqcup_{p \in U_\alpha} (\Lambda^r (E_p)) \to U_\alpha \times \R^{\binom{k_1}{r}},\quad (p, \underbrace{v_{i_1}}_{\in E_p} \wedge \dots \wedge \underbrace{v_{i_n}}_{\in E_p}) \mapsto (p, {\varphi_p ^E (v_{i_1})} \wedge \dots \wedge {\varphi_p ^E(v_{i_n})})$$
+The transition maps are given by $g_{\alpha \beta} ^{\Lambda^r (E)} (x)$, which is
+the matrix in $\R^{n \times n}$, comprised of $r$-minors of $g_{\alpha \beta} ^E (x)$. If $r = \rank E$, then $\Lambda^r (E) = \det (E)$ is the determinant bundle of $E$.
 If $r >  \rank (E)$, then $\Lambda^r (E) = M$ is the trivial vector bundle.
 
 \subsubsection*{The Hom bundle $\ho (E, F)$}
 
-Let $h_{\alpha \beta} \in GL (k_1 \cdot k_2)$ be the matrix of the linear map 
-$$\R^{k_2 \times k_1} \to \R^{k_2 \times k_1},\quad A \mapsto g_{\alpha \beta} ^F \cdot A \cdot g_{\beta \alpha } ^E.$$
-Then $\ho (E, F)$ is the vector bundle over $M$ with transition maps $h_{\alpha \beta}$.
+Define the vector bundle $\ho (E, F)$ as the set
+$$\bigsqcup_{p \in M} \ho (E_p, F_p),$$
+equipped by the smooth structure induced by trivializations 
+$$\varphi_\alpha ^{\ho (E, F)} : \bigsqcup_{p \in U_\alpha} (\ho (E_p, F_p)) \to U_\alpha \times \R^{k_1 \cdot k_2},\quad (p, f) \mapsto (p, \varphi^F _p \circ f \circ {\varphi^E _p}^{-1}),$$
+where we view $\varphi^F _p \circ f \circ {\varphi^E _p}^{-1}: \R^{k_1} \to \R^{k_2}$ as a matrix in $\R^{k_2 \times k_1}$.
+Then $\ho (E, F)$ is the vector bundle over $M$ with transition maps $h_{\alpha \beta}$,
+where $h_{\alpha \beta} (x)$ (for any $x \in U_\alpha \cap U_\beta$) is given by the matrix of the linear map
+$$\R^{k_2 \times k_1} \to \R^{k_2 \times k_1},\quad A \mapsto g_{\alpha \beta} ^F (x) \cdot A \cdot g_{\beta \alpha } ^E (x).$$
+
 
 \subsubsection*{The dual bundle $E^*$}
 
@@ -899,8 +918,11 @@ As a corollary, $T^* M \cong (TM)^*$.
 \end{proposition}
 
 \begin{myproof}
-  Routine matrix computation.
+  For any $p \in M$, we have $\ho (E_p, F_p) \cong E^* _p \otimes F_p$ as vector spaces.
+  Then calculate the trivialization maps and determine that the resulting vector bundles are equivalent.
 \end{myproof}
+
+\subsection{Pullbacks, subbundles and quotient bundles}
 
 Let $f \in C^\infty (M)$, then $df_x : T_x M \to T_{f(x)} M$
 is a vector bundle morphism. Identifying $T \R \cong \R \times \R$,
@@ -921,8 +943,6 @@ Since differentials give us sections on $T^* M$, it is natural to ask whether
 every section on $T^* M$ is a differential of a function on $M$. 
 This is one of the motivations for geometric PDE's: for a $u \in C^\infty (M, T^* M)$,
 we are looking for an $f \in C^\infty (M)$ such that $df = u$.
-
-\subsection{Pullbacks, subbundles and quotient bundles}
 
 \begin{definition}
   Let $M, N$ be manifolds and $f: M \to N$ smooth. Let $\pi: E \to N$
@@ -1152,7 +1172,7 @@ As a result, we get that for any holomorphic vector bundles $E, F$, we have
 $$E \otimes L \cong F \Leftrightarrow E \cong F \otimes L^*.$$
 \begin{theorem}
   Let $S \subseteq M$ be a complex submanifold of codimension $1$.
-  Then $$K_S = (K_M \otimes \mathcal{O} ([S]))\big|_S.$$
+  Then $$K_S \cong (K_M \otimes \mathcal{O} ([S]))\big|_S.$$
 \end{theorem}
 
 \begin{myproof}
@@ -1179,7 +1199,7 @@ For this section, let $M$ be a complex manifold of dimension $n$.
 \end{remark}
 
 \begin{proposition}
-  $\pic (M)$ is an abelian group with $L^{-1} = L$ and a neutral element $M \times \C$.
+  $\pic (M)$ is an abelian group with $L^{-1} = L^*$ and a neutral element $M \times \C$.
 \end{proposition}
 
 Denote by $\mathcal{T} (M)$ the set of all open covers $\{U_\alpha\}$ of $M$ together with functions 
@@ -1314,8 +1334,45 @@ This implies that $\mathcal{O}([H]) \cong \mathcal{O}(1)$.
   \begin{equation*}
     R([v], \lambda a) = d \pi_v (\lambda a) \otimes ([v], v) = \lambda \cdot (d \pi_v (a) \otimes ([v], v)) = d \pi_v (a) \otimes ([v], \lambda v). \qedhere
   \end{equation*}
+  Also, for any $v \in \C^{n + 1} \setminus \{0\}$ we have
+  \begin{equation*}
+    \ker R([v], \cdot) = \ker (a \mapsto d\pi_v (a)) = \C \cdot v,
+  \end{equation*}
+  so 
+  \begin{equation*}
+    ([v], a) \in \ker R \Leftrightarrow a \in \ker R([v], \cdot) \Leftrightarrow a \in \C \cdot v \Leftrightarrow ([v], a) \in \mathcal{O}(-1). \qedhere
+  \end{equation*}
 \end{myproof}
 
+If we multiply this exact sequence with $\mathcal{O} (1)$, we get 
+$$0 \to \C P^n \times \C \to (\C P^n \times \C^{n + 1}) \otimes \mathcal{O}(1) \to \C P^n \times \C \to 0.$$
+By dualizing, we get 
+$$0 \to T^* \C P^n \to (\C P^n \times \C^{n + 1}) \otimes \mathcal{O} (-1) \to \C P^n \times \C \to 0.$$
+By taking determinants, we get 
+\begin{align*}
+  \det ((\C P^n \times \C^{n + 1}) \otimes \mathcal{O}(-1)) &= \det (T^* \C P^n) \otimes \det (\C P^n \times \C)\\
+  &= \det (T^* \C P^n) \\
+  &= K_{\C P^n}.
+\end{align*}
+Now notice that the transition functions of $\C P^n \times \C^{n + 1}$ are just the identity $I_{n + 1}$
+and the transition functions of $\mathcal{O}(-1)$ are $\left(\frac{z_\beta}{z_\alpha}\right)^{-1}$,
+so their Cauchy product is 
+$$\begin{pmatrix}
+  \left(\frac{z_\beta}{z_\alpha}\right)^{-1} & & \\
+   & \ddots & \\
+   & & \left(\frac{z_\beta}{z_\alpha}\right)^{-1}
+\end{pmatrix} = g_{\alpha \beta},$$
+so $\det g_{\alpha \beta} = \left(\frac{z_\beta}{z_\alpha}\right)^{-(n + 1)}$.
+As a result, 
+$$\det ((\C P^n \times \C^{n + 1}) \otimes \mathcal{O}(-1)) \cong \mathcal{O}(-(n + 1))$$
+and so $K_{\C P^n} \cong \mathcal{O} (-(n + 1))$.
+
+\begin{corollary}
+  Let $S \subseteq \C P^n$ be a complex submanifold of codimension $1$, given by 
+  $$S = \{[z_0: \cdots : z_n ] \in \C P^n\ |\ p(z_0, \dots, z_n) = 0\},$$
+  where $p \in \pol_k (\C^{n + 1})$. Then 
+  $$K_S \cong (K_{\C P^n} \otimes \mathcal{O}([S]))\big|_S \cong \mathcal{O} (-(n + 1)) \otimes \mathcal{O}(k) \cong \mathcal{O}(k - n - 1).$$
+\end{corollary}
 
 
 
